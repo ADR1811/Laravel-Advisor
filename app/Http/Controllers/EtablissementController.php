@@ -58,6 +58,14 @@ class EtablissementController extends Controller
 
     public function destroy($id)
     {
-        return view('etablissements/destroy');
+        // on verifie que l'utilisateur est connecté et qu'il est propriétaire de l'etablissement
+        $user = auth()->user();
+        $etablissement = Etablissement::findOrfail($id);
+
+        if ($user->id == $etablissement->user_id) {
+            $etablissement->delete();
+        }
+
+        return redirect()->route('show.all.etablissements');
     }
 }
