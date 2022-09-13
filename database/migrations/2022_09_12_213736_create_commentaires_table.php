@@ -19,8 +19,8 @@ return new class extends Migration
             $table->foreignId('etablissement_id')->constrained();
             // clé étrangère vers la table users
             $table->foreignId('user_id')->constrained();
-            $table->string('commentaire');
-            $table->integer('note');
+            $table->string('content');
+            $table->integer('rating');
             $table->timestamps();
         });
     }
