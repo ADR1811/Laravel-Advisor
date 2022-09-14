@@ -11,7 +11,10 @@ class CommentaireController extends Controller
     public function store(Request $request, $id)
     {
         $user = auth()->user();
-
+        $validated = $request->validate([
+            'content' => 'required',
+            'rating' => 'required',
+        ]);
         $commentaire = new Commentaire();
         $commentaire->user_id = $user->id;
         $commentaire->etablissement_id = $id;

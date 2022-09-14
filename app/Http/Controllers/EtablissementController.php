@@ -44,6 +44,14 @@ class EtablissementController extends Controller
     {
         $user = auth()->user();
 
+        $validated = $request->validate([
+            'nom' => 'required',
+            'adresse' => 'required',
+            'ville' => 'required',
+            'code_postal' => 'required',
+            'pays' => 'required',
+        ]);
+
         $etablissemnt = new Etablissement();
         $etablissemnt->user_id = $user->id;
         $etablissemnt->nom = $request->nom;
@@ -67,6 +75,13 @@ class EtablissementController extends Controller
 
     public function update(Request $request, $id)
     {
+        $validated = $request->validate([
+            'nom' => 'required',
+            'adresse' => 'required',
+            'ville' => 'required',
+            'code_postal' => 'required',
+            'pays' => 'required',
+        ]);
         $etablissement = Etablissement::findOrfail($id);
         $etablissement->nom = $request->nom;
         $etablissement->adresse = $request->adresse;

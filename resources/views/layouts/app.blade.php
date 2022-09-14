@@ -34,6 +34,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        {{-- si connecter afficher Créer avec comme route create.etablissement --}}
+                        @auth
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('create.etablissement') }}">Créer</a>
+                            </li>
+                        @endauth
 
                     </ul>
 
