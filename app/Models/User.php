@@ -44,10 +44,10 @@ class User extends Authenticatable
 
     public function etablissements()
     {
-        return $this->hasMany(Etablissement::class);
+        return $this->hasMany(Etablissement::class, 'user_id');
     }
     public function commentaires()
     {
-        return $this->hasMany(Commentaire::class);
+        return $this->hasMany(Commentaire::class, 'user_id');
     }
 }

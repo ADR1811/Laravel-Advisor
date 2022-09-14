@@ -1,0 +1,15 @@
+// fa fa-star checked
+a.col-md-4{
+    // remove default link styles
+    text-decoration: none;
+    color: inherit;
+}
+a.col-md-4:hover{
+    text-decoration:  none;
+    color: inherit;
+    // mouse pointer
+    cursor: pointer;
+}
+.checked {
+  color: #ff9f1c;
+}

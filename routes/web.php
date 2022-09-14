@@ -17,17 +17,16 @@ use App\Http\Controllers\CommentaireController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
 
 
 // Route pour voir un ou des établissements
-Route::get('/etablissements', [EtablissementController::class, 'index'])->name('show.all.etablissements');
+Route::get('/', [EtablissementController::class, 'index'])->name('show.all.etablissements');
 Route::get('/etablissements/{id}', [EtablissementController::class, 'show'])->where('id', '[0-9]+')->name('show.etablissement');
 
 // route pour créer un établissement et le mettre en base de données

@@ -14,7 +14,17 @@ class EtablissementController extends Controller
     {
         $etablissements = Etablissement::all();
 
-        return view('etablissements/index', ['etablissements' => $etablissements]);
+        // faire la moyenne des notes dans commentaires
+        foreach ($etablissements as $etablissement) {
+            $note = 0;
+            foreach ($etablissement->commentaire as $commentaire) {
+                $note += $commentaire->rating;
+            }
+            $note = $note / count($etablissement->commentaire);
+            $etablissement->rating = $note;
+        }
+
+        return view('home', ['etablissements' => $etablissements]);
     }
 
     public function create()

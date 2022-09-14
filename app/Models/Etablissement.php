@@ -10,10 +10,10 @@ class Etablissement extends Model
     use HasFactory;
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function commentaire()
     {
-        return $this->hasMany(Commentaire::class);
+        return $this->hasMany(Commentaire::class, 'etablissement_id');
     }
 }
