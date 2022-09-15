@@ -1,8 +1,11 @@
 # Laravel TripAdvisor
 
 Le projet à pour but de reproduire certains aspect de TripAdvisor avec le framework PHP Laravel
+
 J'ai fais une base de donnée sur docker
+
 Le .env est déjà configurer pour faire tourné la bdd docker
+
 Sinon changer le .env
 
 Pour le lancer en local: 
