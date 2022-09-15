@@ -130,13 +130,15 @@ class EtablissementController extends Controller
 
         $images = json_decode($etablissement->images, true);
         $imageStatus = json_decode($request->imageStatus, true);
-        foreach ($imageStatus as $key => $status) {
-            if ($status['status'] == 'replaced') {
-                Storage::delete($images[$key]);
-                $images[$key] = $request->file($key) ? $request->file($key)->store('public') : '';
-            } else if ($status['status'] == 'removed') {
-                Storage::delete($images[$key]);
-                $images[$key] = '';
+        if ($imageStatus != null) {
+            foreach ($imageStatus as $key => $status) {
+                if ($status['status'] == 'replaced') {
+                    Storage::delete($images[$key]);
+                    $images[$key] = $request->file($key) ? $request->file($key)->store('public') : '';
+                } else if ($status['status'] == 'removed') {
+                    Storage::delete($images[$key]);
+                    $images[$key] = '';
+                }
             }
         }
         // on reorganise les images
@@ -162,7 +164,6 @@ class EtablissementController extends Controller
 
     public function destroy($id)
     {
-        // on verifie que l'utilisateur est connecté et qu'il est propriétaire de l'etablissement
         $user = auth()->user();
         $etablissement = Etablissement::findOrfail($id);
         $images = json_decode($etablissement->images, true);
@@ -178,7 +179,6 @@ class EtablissementController extends Controller
             }
             $etablissement->delete();
         }
-
         return redirect()->route('show.my-etablissement');
     }
     public function showForUser()

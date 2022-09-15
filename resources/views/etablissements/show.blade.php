@@ -43,7 +43,7 @@
                 <h1>{{ $etablissement->nom }}</h1>
                 <p>{{ $etablissement->adresse }}, {{ $etablissement->code_postal }} {{ $etablissement->ville }},
                     {{ $etablissement->pays }}</p>
-                <p> Crée le {{ $etablissement->created_at->format('d/m/Y') }}</p>
+                <p> Créé le {{ $etablissement->created_at->format('d/m/Y') }}</p>
                 <p>
                     {{-- on affiche 5 étoiles vide et en fonction du nombre d'étoiles on affiche des étoiles pleines --}}
                     @for ($i = 0; $i < 5; $i++)

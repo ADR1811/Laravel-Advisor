@@ -1,8 +1,9 @@
 @extends('layouts.app')
 @section('content')
-    <h2>Édition de l'établissement</h2>
     <form action="{{ route('update.etablissement', $etablissement->id) }}" method="POST"
         enctype="multipart/form-data"class="container">
+        <h2>Édition de l'établissement</h2>
+
         @csrf
         <div class="form-group">
             <label for="nom">Nom</label>
@@ -73,7 +74,7 @@
 
                 {{ $count }}/5
             </p>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary">Modifier</button>
     </form>
 
 
