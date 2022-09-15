@@ -26,7 +26,7 @@
                                 <p class="card-text">{{ $etablissement->adresse }}, {{ $etablissement->code_postal }}
                                     {{ $etablissement->ville }}, {{ $etablissement->pays }}</p>
 
-                                <p class="card-text">Crée le {{ $etablissement->created_at->format('d/m/Y') }}</p>
+                                <p class="card-text">Créé le {{ $etablissement->created_at->format('d/m/Y') }}</p>
 
                                 {{-- button with src --}}
                                 <a href="{{ route('show.etablissement', $etablissement) }}" class="btn btn-primary">Voir
