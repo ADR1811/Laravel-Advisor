@@ -179,7 +179,7 @@ class EtablissementController extends Controller
             $etablissement->delete();
         }
 
-        return redirect()->route('show.all.etablissements');
+        return redirect()->route('show.my-etablissement');
     }
     public function showForUser()
     {
