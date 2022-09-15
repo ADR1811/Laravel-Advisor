@@ -1,77 +1,159 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
+    {{-- content section --}}
 
-<body>
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="{{ asset('storage/' . $etablissement->images) }}" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ $etablissement->nom }}</h5>
-            <p class="card-text">{{ $etablissement->adresse }}</p>
-            <p class="card-text">{{ $etablissement->ville }}</p>
-            <p class="card-text">{{ $etablissement->code_postal }}</p>
-            <p class="card-text">{{ $etablissement->pays }}</p>
-        </div>
-    </div>
+    <div class="container container-etablissement">
+        <div class="row">
+            <div class="col-md-6">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false">
+                    <div class="carousel-indicators">
 
-    {{-- write comments --}}
-
-
-    {{-- comments section --}}
-    <div class="card">
-        <div class="card-header">
-            <h3>Comments</h3>
-        </div>
-        <form action="{{ route('store.comment', $etablissement->id) }}" method="POST">
-            @csrf
-            {{-- FontAwesome start to do rating --}}
-            <div class="form-group">
-                <label for="rating">Note</label>
-                <div class="rating">
-                    <input type="radio" name="rating" id="star1" value="1"><label for="star1">1</label>
-                    <input type="radio" name="rating" id="star2" value="2"><label for="star2">2</label>
-                    <input type="radio" name="rating" id="star3" value="3"><label for="star3">3</label>
-                    <input type="radio" name="rating" id="star4" value="4"><label for="star4">4</label>
-                    <input type="radio" name="rating" id="star5" value="5"><label for="star5">5</label>
+                        @foreach ($etablissement->images as $image)
+                            @if ($image != '')
+                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide-to="{{ $loop->index }}" class="{{ $loop->first ? 'active' : '' }}"
+                                    aria-label="Slide {{ $loop->index }}"></button>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="carousel-inner">
+                        @foreach ($etablissement->images as $image)
+                            @if ($image != '')
+                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                    <img src="{{ Storage::url($image) }}" class="d-block w-100" alt="...">
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="content">Commentaire</label>
-                <textarea class="form-control" name="content" id="content" cols="30" rows="10"></textarea>
+            {{-- right col for texte --}}
+            <div class="col-md-6 col-right">
+                <h1>{{ $etablissement->nom }}</h1>
+                <p>{{ $etablissement->adresse }}, {{ $etablissement->code_postal }} {{ $etablissement->ville }},
+                    {{ $etablissement->pays }}</p>
+                <p> Crée le {{ $etablissement->created_at->format('d/m/Y') }}</p>
+                <p>
+                    {{-- on affiche 5 étoiles vide et en fonction du nombre d'étoiles on affiche des étoiles pleines --}}
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < floor($etablissement->rating))
+                            <i class="fa fa-star checked"></i>
+                        @else
+                            <i class="fa fa-star-o"></i>
+                        @endif
+                    @endfor
+                    <span>{{ floor($etablissement->rating) }}/5</span>
+                </p>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <div class="card-body">
-            <ul class="list-group">
-                @foreach ($commentaires as $commentaire)
-                    <li class="list-group-item">
-                        {{-- user and after rating and after content and after date --}}
-                        <div class="row">
-                            <div class="col-md-3">
-                                <h5>{{ $commentaire->user->name }}</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <h5>{{ $commentaire->rating }}</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <h5>{{ $commentaire->content }}</h5>
-                            </div>
-                            <div class="col-md-3">
-                                <h5>{{ $commentaire->created_at }}</h5>
-                            </div>
-                        </div>
-                    </li>
-                @endforeach
-            </ul>
         </div>
     </div>
+    {{-- end content section --}}
+    <br>
+    <br>
+    <br>
+    {{-- start Comment section --}}
 
-</body>
+    <div class="container container-comment">
+        <h2>Commentaires</h2>
+        <br>
+        <div>
+            <h3>Ajouter un commentaire</h3>
+            <form action="{{ route('store.comment', $etablissement) }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="content">Commentaire</label>
+                    <textarea class="form-control" name="content" id="content" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="rating">Note : </label>
+                    <input type="radio" name="rating" value="1" hidden>
+                    <input type="radio" name="rating" value="2" hidden>
+                    <input type="radio" name="rating" value="3" hidden>
+                    <input type="radio" name="rating" value="4" hidden>
+                    <input type="radio" name="rating" value="5" hidden>
 
-</html>
+                    <i class="fa fa-star-o" id="star1"></i>
+                    <i class="fa fa-star-o" id="star2"></i>
+                    <i class="fa fa-star-o" id="star3"></i>
+                    <i class="fa fa-star-o" id="star4"></i>
+                    <i class="fa fa-star-o" id="star5"></i>
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter</button>
+            </form>
+            <br>
+            {{-- rajouter une ligne de séparation --}}
+            <hr>
+            <br>
+            <div class="comment-list">
+                @foreach ($commentaires as $commentaire)
+                    <div class="comment">
+                        <div>
+                            <span>Par : {{ $commentaire->user->name }}</span>
+                        </div>
+                        <div class="comment-rating">
+                            @for ($i = 0; $i < 5; $i++)
+                                @if ($i < floor($commentaire->rating))
+                                    <i class="fa fa-star checked"></i>
+                                @else
+                                    <i class="fa fa-star-o"></i>
+                                @endif
+                            @endfor
+                        </div>
+                        <span>Le : {{ $commentaire->created_at->format('d/m/Y') }}</span>
+                        <div>
+                            <p>{{ $commentaire->content }}</p>
+                        </div>
+                    </div>
+                    {{-- si l'user est connecté --}}
+
+                    @if (Auth::check())
+                        @if ($commentaire->user_id == Auth::user()->id || $etablissement->user_id == Auth::user()->id)
+                            <form action="{{ route('delete.comment', $commentaire) }}" method="GET">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        @endif
+                    @endif
+                @endforeach
+            </div>
+        </div>
+        <script>
+            let inputs = document.querySelectorAll('input[type="radio"]');
+            let star1 = document.querySelector('#star1');
+            let star2 = document.querySelector('#star2');
+            let star3 = document.querySelector('#star3');
+            let star4 = document.querySelector('#star4');
+            let star5 = document.querySelector('#star5');
+
+            let stars = [star1, star2, star3, star4, star5];
+
+            stars.forEach((star, index) => {
+                star.addEventListener('click', () => {
+                    inputs[index].checked = true;
+                    stars.forEach((star, index2) => {
+                        if (index2 <= index) {
+                            star.classList.remove('fa-star-o');
+                            star.classList.add('fa-star');
+                            star.classList.add('checked');
+                        } else {
+                            star.classList.remove('fa-star');
+                            star.classList.remove('checked');
+                            star.classList.add('fa-star-o');
+                        }
+                    })
+                });
+            });
+        </script>
+    @endsection

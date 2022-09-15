@@ -1,5 +1,4 @@
 import './bootstrap';
-require('@fortawesome/fontawesome-free/js/all.js');
 
 import Alpine from 'alpinejs';
 

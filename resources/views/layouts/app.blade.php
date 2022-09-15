@@ -39,6 +39,9 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('create.etablissement') }}">Créer</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('show.my-etablissement') }}">Mes établissements</a>
+                            </li>
                         @endauth
 
                     </ul>

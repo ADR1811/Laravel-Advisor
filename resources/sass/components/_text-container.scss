@@ -1,0 +1,16 @@
+.container-etablissement{
+    .col-right{
+        h1,p{
+            margin-left: 35px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .container-etablissement{
+        .col-right{
+            h1,p{
+                margin-left: 0;
+            }
+        }
+    }
+}
