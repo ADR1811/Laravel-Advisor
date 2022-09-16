@@ -14,8 +14,8 @@ Pour le lancer en local:
   composer install
   npm install
   php artisan migrate
+  npm run build
   php artisan serv
-  npm run dev
 ```
    
 
