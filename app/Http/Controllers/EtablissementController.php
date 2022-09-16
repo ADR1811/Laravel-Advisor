@@ -47,9 +47,6 @@ class EtablissementController extends Controller
         $etablissement->images = json_decode($etablissement->images, true);
         foreach ($etablissement->commentaire as $commentaire) {
             $note += $commentaire->rating;
-            // if ($user && ($commentaire->user_id == $user->id || $etablissement->user_id == $user->id)) {
-            //     $commentaire->canDelete = true;
-            // }
         }
         if (count($etablissement->commentaire) > 0) {
             $note = $note / count($etablissement->commentaire);
@@ -76,6 +73,7 @@ class EtablissementController extends Controller
         $image3 = $request->file('image3') ? $request->file('image3')->store('public') : '';
         $image4 = $request->file('image4') ? $request->file('image4')->store('public') : '';
         $image5 = $request->file('image5') ? $request->file('image5')->store('public') : '';
+
         $etablissemnt = new Etablissement();
         $etablissemnt->user_id = $user->id;
         $etablissemnt->nom = $request->nom;
@@ -83,7 +81,7 @@ class EtablissementController extends Controller
         $etablissemnt->ville = $request->ville;
         $etablissemnt->code_postal = $request->code_postal;
         $etablissemnt->pays = $request->pays;
-        // enregistrer l'image
+
         $etablissemnt->images = json_encode([
             'image1' => $image1,
             'image2' => $image2,
@@ -187,7 +185,6 @@ class EtablissementController extends Controller
         $etablissements = $user->etablissements;
         foreach ($etablissements as $etablissement) {
             $note = 0;
-            // on regarde le type de $etablissement->images
             foreach ($etablissement->commentaire as $commentaire) {
                 $note += $commentaire->rating;
             }
@@ -195,7 +192,6 @@ class EtablissementController extends Controller
                 $note = $note / count($etablissement->commentaire);
             }
             $etablissement->rating = $note;
-            // on convertit $etablissement->images en json
             $etablissement->images = json_decode($etablissement->images, true);
         }
 

@@ -28,7 +28,6 @@
 
                                 <p class="card-text">Créé le {{ $etablissement->created_at->format('d/m/Y') }}</p>
 
-                                {{-- button with src --}}
                                 <a href="{{ route('show.etablissement', $etablissement) }}" class="btn btn-primary">Voir
                                     l'établissement</a>
 

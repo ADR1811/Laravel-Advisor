@@ -31,9 +31,9 @@ class CommentaireController extends Controller
     }
     public function destroy($id)
     {
-        // peut supprimer si auteur du commentaire ou si propriétaire de l'établissement
         $commentaire = Commentaire::findOrfail($id);
         $idEtablissement = $commentaire->etablissement_id;
+        // peut supprimer si auteur du commentaire ou si propriétaire de l'établissement
         if (auth()->user()->id == $commentaire->user_id || auth()->user()->id == $commentaire->etablissement->user_id) {
             $commentaire->delete();
         }
