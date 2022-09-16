@@ -25,7 +25,7 @@ Pour le lancer en local:
 Voici les features : 
 ```bash
     1. Login\Register\Reset-password
-    2. Créer une place
+    2. Créer une place avec des images , un nom, adresse, ville, code postal, pays
     3. Modifier\Supprimer ses propres places
     4. Supprimer n'importe quel commentaire sous ses propres places
     5. Créer un commentaire avec une note sous n'importe quelle place et pouvoir le supprimer
