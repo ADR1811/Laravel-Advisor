@@ -26,11 +26,16 @@
         <div class="form-group">
             <label for="images">Images</label>
             {{-- 5 files input --}}
-            <input type="file" id="image1" name="image1" accept="image/png, image/jpeg" class="image-input" hidden>
-            <input type="file" id="image2" name="image2" accept="image/png, image/jpeg" class="image-input" hidden>
-            <input type="file" id="image3" name="image3" accept="image/png, image/jpeg" class="image-input" hidden>
-            <input type="file" id="image4" name="image4" accept="image/png, image/jpeg" class="image-input" hidden>
-            <input type="file" id="image5" name="image5" accept="image/png, image/jpeg" class="image-input" hidden>
+            <input type="file" id="image1" name="image1" accept="image/png, image/jpeg, image/webp"
+                class="image-input" hidden>
+            <input type="file" id="image2" name="image2" accept="image/png, image/jpeg, image/webp"
+                class="image-input" hidden>
+            <input type="file" id="image3" name="image3" accept="image/png, image/jpeg, image/webp"
+                class="image-input" hidden>
+            <input type="file" id="image4" name="image4" accept="image/png, image/jpeg, image/webp"
+                class="image-input" hidden>
+            <input type="file" id="image5" name="image5" accept="image/png, image/jpeg, image/webp"
+                class="image-input" hidden>
 
             {{-- Container  d'images ajouté avec du js --}}
             <div id="images-container" class="d-flex flex-wrap"></div>
