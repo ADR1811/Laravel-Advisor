@@ -1,5 +1,7 @@
 # Laravel TripAdvisor
 
+REQUIREMENTS : PHP > 8.0.0 ; COMPOSER ; NODEJS & NPM ; DOCKER (OPTIONNEL)
+
 Le projet a pour but de reproduire certains aspects de TripAdvisor avec le framework PHP Laravel
 
 J'ai fait une base de donnée sur docker
