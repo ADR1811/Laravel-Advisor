@@ -29,3 +29,4 @@ Voici les features :
     5. Créer un commentaire avec une note sous n'importe quelle place et pouvoir le supprimer
 ```
 
+Un dump d'exemple de la bdd est aussi disponnible sous le nom de data.sql
