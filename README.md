@@ -14,6 +14,7 @@ Pour le lancer en local:
   composer install
   npm install
   php artisan migrate
+  php artisan storage:link
   npm run build
   php artisan serv
 ```
